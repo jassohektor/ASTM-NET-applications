@@ -1,0 +1,10 @@
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\obj\Debug\ADVIA2120.frmAdvia.resources
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\obj\Debug\ADVIA2120.frmloading.resources
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\obj\Debug\ADVIA2120.Properties.Resources.resources
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\obj\Debug\ADVIA.csproj.GenerateResource.cache
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\obj\Debug\ADVIA2120.exe
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\obj\Debug\ADVIA2120.pdb
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\bin\Debug\ADVIA2120.exe
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\bin\Debug\ADVIA2120.pdb
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\obj\Debug\ADVIA.csproj.CoreCompileInputs.cache
+C:\projects\index\@ASTM-ChemistrySystems\ADVIA120\ADVIA\obj\Debug\ADVIA.csproj.AssemblyReference.cache
