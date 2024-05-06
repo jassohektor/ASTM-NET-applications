@@ -1,6 +1,6 @@
 <p align="center" style="font-weight: bolder;">General Info</p>
 
-Hello folks, this repo contains 4 laboratory system projects created with C#.NET and ASTM standards to handle messages thru monodirectional, bidirectional and unidirectional communication protocols. All Windows Applications using RS-232C standard port to listen, read and write data between the laboratory system and the host computer. Also each app includes it's own manual of instructions that describes the type of communication, modes of operation, message format and data transfer with ASCII codes as well as the list of samples to be performed with the laboratory system.
+Hello folks, this repo contains 4 laboratory system projects created with C#.NET and ASTM standards to handle messages thru monodirectional, bidirectional and unidirectional communication protocols. All Windows Applications using RS-232C standard port to listen, read and write data between the laboratory system and the host computer. Also each app includes it's own manual of instructions that describes the type of communication, modes of operation, message format and data transfer with ASCII codes as well as the list of samples to be performed with the instrument.
 
 
 
@@ -31,20 +31,20 @@ Dimension XL/RxL:
 </p>
 
 
-**DB - stored procedure example:**
-
+<p align="center" style="font-weight: bolder;">DB - stored procedure example</p>
+<p align="center"">
 ![sp_GetUsertData](https://github.com/jassohektor/ASTM-.NET-windows-apps/assets/168608755/5c901330-82cc-4343-ad4c-4976b9d53900)
+</p>
 
 
-
-**Final Notes:**
+<p align="center" style="font-weight: bolder;">Final Notes</p>
 
 Feeling frustrated for getting too much information? believe me I was going to give up and cry like a baby when I were working with those instruments, nobody helped me except by the doctor to validate results of the patients but the developer inside me said: you can do it AND I'm not sure whether this repo can help out someone else or guide you to understand better ASTM standards, also the laboratory system applications will not work without the database and propper dbo objects to handle operations, obviously you need the instrument because of the required settings to prepare the port communication to make the blood tests and some doctor to guide you getting the samples ready to use them. However here you can start to develop your own clinical system and you already have all the blood tests cover, of course those instruments must cost alot of money. please reach me out if you need any help.
 
 
-**A bit of gossip of this experience:**
+<p align="center" style="font-weight: bolder;">A bit of gossip of this experience</p>
 
 The company I was working for along time ago when I developed those apps never invested to improve their systems and they paid me like if I were a student or worst than a developer junior, I couldn't even survive with that salary and when I quit that job "they blackmailed me". I'm not saying all companies are like that but man I was young and back in the day was really hard to push myself to success!
 
 
-**The End**
+<p align="center" style="font-weight: bolder;">The End</p>
