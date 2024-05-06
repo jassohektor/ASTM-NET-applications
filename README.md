@@ -1,2 +1,1 @@
-# ASTM-.NET-windows-apps
-.NET windows applications using RS232C-port for monodirectional, bidirectional and unidirectional protocols.
+This repo contains 4 laboratory information systems created with C#.NET and ASTM standards to handle messages thru monodirectional, bidirectional and unidirectional communication protocols. All Windows Applications using RS232C-port to listen, read and write data between the system instrument and the host computer. Also each app includes it's own manual of instructions that describes the type of communication and how to identify ASCII codes.
