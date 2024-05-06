@@ -1,4 +1,4 @@
-<p align="center">**General Info:**</p>
+<p align="center" style="weight:bold;">General Info:</p>
 
 Hello folks, this repo contains 4 laboratory system projects created with C#.NET and ASTM standards to handle messages thru monodirectional, bidirectional and unidirectional communication protocols. All Windows Applications using RS-232C standard port to listen, read and write data between the laboratory system and the host computer. Also each app includes it's own manual of instructions that describes the type of communication, modes of operation, message format and data transfer with ASCII codes as well as the list of samples to be performed with the laboratory system.
 
