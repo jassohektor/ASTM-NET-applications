@@ -1,0 +1,1461 @@
+Capítulo 1: Información General
+Introducción
+Esta especificación define las conexiones físicas de línea, enlace de datos, y
+aplicación de protocolos de nivel de comunicación utilizados por la dimensión ®
+sistema de química clínica. También se describe la interfaz entre el
+Dimension ® y un sistema de Información de Laboratorio.
+Los términos "instrumento" y "computadora" se usan de manera habitual
+todo y se refieren a los respectivos extremos de la interfaz.
+Principios de funcionamiento
+Los datos de muestra y prueba de solicitud se puede introducir tanto por el instrumento o
+el computadora. Los datos se pueden introducir en el instrumento, cuando
+computadora está ocupado haciendo otras aplicaciones, no está en línea, o cuando la iniciación
+de procesamiento de la muestra es una prioridad....
+Escuchar
+Leer fonéticamente
+Diccionario - Ver diccionario detallado
+
+Definiciones
+ • Una muestra es un líquido utilizado para determinar la concentración de un
+ analito particular en un momento determinado. Varias pruebas tales
+ se puede realizar en cada muestra. Debido a algunas pruebas que requieran
+ pretratamiento de la muestra, una muestra puede requerir tanto tratamiento previo y
+ tazas de la muestra sin tratar o posiciones. La comunicación entre
+ instrumento y el ordenador organiza estas solicitudes por la muestra.
+Escuchar
+Leer fonéticamente
+Diccionario - Ver diccionario detallado
+
+• Las compañías de la muestra son bien conocidas o no por el instrumento.
+ Las compañías de ejemplo se sabe que el instrumento tiene un
+ posición de la muestra asignado en dicha compañía. Las compañías de muestra que se
+ sabe que el aparato son desconocidos solamente por el usuario
+ supresión de toda la información de la muestra de asignación correspondientes para que
+ portador usando las funciones del instrumento de teclado. El más conocido o
+ estatus sanitario desconocido respecto de un portador de la muestra viene determinada por su presencia
+ o ausencia en el mensaje de la encuesta
+
+• Las listas de carga se cotejan las solicitudes de carga de la muestra a una muestra
+ portador. Cargue las muestras enumeradas tienen sus posiciones asignadas por el
+ computadora, y debe ser transmitida a un "desconocido" transportista.
+ NOTA: Los transportistas de muestras y listas de carga sólo están disponibles en
+ Dimension ® AR instrumento
+
+• Las listas de carga se descargan como una comunicación ininterrumpida de
+ el computadora a un portador de la muestra individual del instrumento.
+ Múltiples listas de carga se permiten en el portador de la misma muestra como
+ siempre y cuando se comunican con el instrumento en el mismo
+ descarga, y no exceder el número de puestos disponibles
+ en un soporte (60). El computadora se rompe la comunicación y
+ termina la descarga, respondiendo a la encuesta instrumento
+ mensaje con el "No se ha solicitado" mensaje.
+ Dimension ® de química clínica del sistema de interfaz de Especificaciones Información General
+ 09/2002 1-2 D00396
+
+• Si al menos un portador de la muestra se conoce, ya sea A o B, solo
+ solicitudes de muestras tienen sus posiciones asignadas por el instrumento.
+ • solicitudes de muestras individuales se pueden descargar a cualquier conocido o
+ compañías desconocidas en cualquier momento hay memoria muestra disponible
+ y posiciones.
+ • Una solicitud única muestra también la respuesta esperada a un
+ instrumento "de consulta" cuando el instrumento está usando Enviar
+ ID / modo de recepción de la comunicación.
+ Una vez que el computadora ha descargado solicitudes de muestras en el instrumento,
+ modificación directa de estas solicitudes puede ocurrir sólo en el instrumento.
+ El computadora sólo es capaz de eliminar una solicitud en su totalidad antes de descargar
+ al inicio del tratamiento. Un método indirecto para la modificación de
+ el computadora es proporcionado por la eliminación seguida de la presentación de la
+ modificada por solicitud.
+ Modos de funcionamiento
+ Todos los modos de operación son seleccionable por software. En conjunto, el
+ modos de operación de apoyo a la descarga del procesamiento de la muestra
+ las peticiones de la computadora y la transmisión de los resultados de la
+ instrumento. El cuadro se detalla la dirección y la información comunicada
+ para cada modo de operación seleccionable.
+
+• Si al menos un portador de la muestra se conoce, ya sea A o B, solo
+ solicitudes de muestras tienen sus posiciones asignadas por el instrumento.
+ • Una sola muestra de solicitudes se pueden descargar software
+ Modo seleccionable
+ De la Operación
+ Dirección de Información
+ Desactivado N / A Ninguno
+ enviar sólo ? Resultados de la computadora
+ Dimensión clínica ®
+ química del sistema
+ enviar y recibir solicitudes ?
+ Respuestas
+ Resultados
+ ID enviar / recibir solicitudes ?
+ Consulta
+ Respuestas
+ Resultados
+ Cuando uno de los modos de operación (como se indica más arriba) es seleccionado, el
+ campo muestra el número en la muestra de entrada de datos de la pantalla requiere de una
+ entrada.
+ Dimension ® de química clínica del sistema de interfaz de Especificaciones Información General
+ 09/2002 03.01 D00396
+ Especificaciones físicas de línea y Protocolo
+ El instrumento se ajustará a las especificaciones de RS 232-C. La
+ conector en el instrumento es un DB-25 (subminiatura "D") de estilo
+ conector. Todos los modos de operación de uso RS 232-C de la señal DTE
+ pliego de condiciones.
+ Instrumento de conector y de Género
+ DB AR-25F
+ XL DB-25M
+ RXL DB-25M
+ XPAND DB-25M
+ DB ARX-25M
+ Los pines siguientes activos:
+ PIN RS-232C Nombre de la señal
+ Una tierra de chasis
+ 2 Los datos TD Línea de Transmisión
+ 3 RD Recibido de datos en línea
+ 7 Señal de tierra
+ 4 RTS (afirma arriba por instrumento LÍNEA)
+ 20 DTR (afirma arriba por instrumento PUEDE RECIBIR
+ DATOS)
+
+RTS y DTR no se utilizan para el control del computador de flujo, pero indican
+ instrumento de preparación. Antes de transmitir datos, el instrumento no
+ comprobar RTS o DTR por lo tanto, el computadora no puede controlar el flujo de
+ instrumento con estas señales. Protocolos de enlace de datos detectar física
+ desconexión, la pérdida de la compañía, y permitir el control de flujo mediante el envío de ACK,
+ NAK, etc Hay un retraso de un segundo entre la afirmación de la estrategia en tiempo real y
+ primera transmisión.
+ El protocolo de comunicación de datos se compone de dos capas de
+ la comunicación se produce entre el ordenador y el instrumento:
+ control de enlace de datos (DLC) y la interacción a nivel de aplicación. El DLC
+ capa simplemente garantiza el intercambio fiable de mensajes a través de la
+ interfaz. No tiene ningún conocimiento del contenido del mensaje más allá de eso
+ lo cual es necesario para la validación de la comunicación. La aplicación
+ proporcionar funciones de la capa de procesamiento de mensajes y el reconocimiento.
+ Vista trasera del conector instrumento
+ Dimension ® de química clínica del sistema de interfaz de Especificaciones Información General
+ 09/2002 4.1 D00396
+ Los parámetros de comunicación
+Escuchar
+Leer fonéticamente
+Diccionario - Ver diccionario detallado
+
+• Velocidad de transmisión: 300, 600, 1200, 2400, 4800, 9600 y 19200 (no 
+disponibles en AR) 
+• Longitud de bits: 7 u 8 
+• Paridad: Impar, Par, NINGUNO 
+• Bits de parada: 1 o 2 
+• Instrumento de Identificación: Este es fijado por el usuario a identificar de forma única cada 
+Dimension ® sistema de química clínica, que la distingue del 
+otros en configuraciones multi-instrumento. La computadora puede LIS 
+utilizar el valor durante la inicialización para identificar y validar la 
+asignaciones instrumento puerto especificado en el sistema 
+tablas de configuración. 
+Dimension ® de química clínica del sistema de interfaz de Especificaciones Información General 
+09/2002 1-5 D00396 
+Protocolos de enlace de datos 
+La transferencia de datos es seleccionable por el usuario, ya sea ASCII de siete bits o ASCII 
+de ocho caracteres poco. Ni el instrumento ni el ordenador deben 
+"Echo" todos los caracteres recibidos. 
+STX (HEX 2) y ETX (HEX 3) marcará el inicio y final de un 
+transmisión, respectivamente. Ambos personajes serán únicas y nunca 
+aparecen en otras partes de la secuencia de datos. 
+ACK (HEX 6) es siempre la de ser devuelto por el dispositivo receptor 
+siguientes a la recepción correcta de una transmisión. NAK (hexadecimal 15) se 
+devuelto por el dispositivo de recepción después de la recepción de una 
+la transmisión que se encuentran para tener una suma de comprobación incorrecta. Al recibir una 
+NAK, el dispositivo transmisor retransmite el mensaje. El mensaje 
+será retransmitido en respuesta a la NAK para un total de cuatro veces. 
+Si un error, es decir, error de paridad, se produce mientras el receptor está esperando un 
+ACK o NAK, el receptor transmite una ENQ al remitente, solicitando 
+un reintento. A continuación se detallan el uso de STX-ETX, ACK, NAK y 
+ENQ para cada modo. 
+
+Escuchar
+Leer fonéticamenteDiccionario - Ver diccionario detallado
+
+Modo de operación 
+			ETX STX		ACK-NAK 	ENQ
+
+
+ enviar sólo ? 		Sí 		Sí 		Sí
+ enviar / recibir ? 	Sí 		Sí 		Sí
+ ID enviar / recibir ? 	Sí 		Sí 		Sí
+ terminal? 		No 		No 		No
+ computadora? 		Sí 		Sí 		No
+
+ Dimension ® de química clínica del sistema de interfaz de Especificaciones Información General
+ 09/2002 1.6 D00396
+
+ Formato de los mensajes
+ Para Dimension ® sistema de química clínica modo de operación:
+ 
+La forma general de los mensajes es:
+ <STX> <TIPO> <FS> <DATA> <FS> <CHK> <ETX>
+ |	 |      |     |	    |   |	|__final de la transmisión
+ |	 |      |     |	    |   |__suma de comprobación
+ |	 |      |     |	    |__separador de campo
+ |	 |      |     |__datos de campo (s)
+ |	 |      |__separador de campo
+ |	 |__ identificador de tipo de mensaje
+ |__ inicio de la transmisión
+ 
+Tipo
+ El "tipo"es un mensaje único, un byte identificador (por ejemplo, 'P' de la encuesta mensaje).
+
+ Delimitadores de campo
+ Todos los campos de datos están delimitados con un separador de campo único, <FS> (HEX
+ 1C). <STX> y <ETX> están implicados separadores de campo. El número de
+ los campos pueden variar para algunos mensajes. Para estos casos, hay un campo
+ que especifica el número de campos o grupos de campos a seguir. Otros
+ los campos no pueden contener datos, pero sus lugares se llevan a cabo por el campo
+ separadores.
+
+Campo de identificación 
+Los campos de datos no contienen ninguna identificación del significado de los datos. 
+El orden de los campos y el significado debe ser conocido por el computadora. 
+Campo Número y tamaño 
+El número y la longitud máxima (en bytes) de los campos de datos son 
+depende de <ETX> mensaje, y luego analizar el mensaje de campos 
+según el tipo de mensaje. 
+Contenido del campo 
+Campos contienen caracteres ASCII imprimibles. Las desviaciones del ASCII 
+conjunto se hacen para las lenguas extranjeras. Números como resultados de las pruebas y 
+coeficientes de calibración están representados en cualquiera de los puntos fijos (-dd.dd) o 
+flotantes (-d.ddde-dd) el punto de formato. Se caracterizan por la "e" en 
+la representación de punto flotante. La mayoría de los demás datos son una combinación de 
+caracteres alfanuméricos y otros caracteres imprimibles. 
+Dimension ® de química clínica del sistema de interfaz de Especificaciones Información General 
+09/2002 7.1 D00396 
+Suma de comprobación 
+La suma de comprobación se calcula sobre todos los personajes, incluidos todos los <FS> 
+personajes, entre <STX> y <CHK>. La suma de comprobación se calcula 
+por la suma binaria de 8 bits de todos los caracteres incluidos en el 8 º o 
+bit de paridad supone que es cero. Lleva poco más allá de la octava se pierden. La 
+resultado de 8 bits se convierte en dos caracteres ASCII imprimibles hexagonal, 
+que van desde 00 a FF, que luego se inserta en la secuencia de datos como 
+<CHK>. Los caracteres hexadecimales A-F son mayúsculas. El dispositivo receptor 
+vuelve a calcular la suma de comprobación en el mensaje de buffer y la compara 
+con la suma de control lo recibió. La comparación es la base para 
+reconocimiento posterior reconocimiento (<ACK>) o negativo 
+(<NAK>) De la transmisión. 
+Error al procesar
+
+Cuando el sistema Dimension ® química clínica no puede 
+transmitir con éxito a la computadora, la alarma sonidos de instrumentos y 
+un mensaje de error aparece en la pantalla. El instrumento continuará 
+los intentos de restablecer la comunicación hasta que la interfaz de la computadora es 
+de-configurado de los parámetros de instrumento de comunicación. 
+Los siguientes errores son posibles en todas las dimensiones ® instrumentos 
+DMW / Anfitrión problema de comunicación 
+316 no se puede comunicar con DMW / Anfitrión 
+317 DMW / comunicación de acogida del puerto de error del receptor 
+318 Recibido cuarto NAK de DMW / Anfitrión 
+319 Fecha válida mensaje de DMW / Anfitrión 
+320 no he recibido el mensaje de aceptación de DMW / Anfitrión 
+321 no se ha recibido ACK o NAK de DMW / Anfitrión 
+323 Recibido cuarto ENQ de DMW / Anfitrión 
+322 DMW / Anfitrión rechazó resultado 50 veces 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 2-1 D00396 
+Capítulo 2: Aplicación del Protocolo de mensajes de nivel y diálogos 
+Aplicación del Protocolo de mensajes de nivel 
+Diferentes modos de utilización diferentes mensajes según lo indicado por la tabla 
+a continuación: 
+Operación 
+Modo de mensaje a la dirección 
+enviar sólo ? resultado de computadora nuevo instrumento 
+enviar / recibir encuesta computadora ? 
+instrumento ? muestra de 
+Dimension ® instrumento ? clínicos ninguna solicitud 
+sistema de química ? instrumento esperar 
+computadora ? solicitud de aceptación 
+instrumento ? resultado de la aceptación de estado 
+? ordenador resultado nuevo instrumento 
+computadora de calibración ? resultado 
+ID enviar y recibir encuesta computadora ? 
+instrumento ? muestra de 
+? instrumento ninguna solicitud 
+? instrumento esperar 
+computadora ? solicitud de aceptación 
+? consulta de computadoras 
+instrumento ? resultado de la aceptación de estado 
+? ordenador resultado nuevo instrumento 
+computadora de calibración ? resultado 
+Mensaje Prioridades
+
+----------------------------------------------------------------------------------------------------------
+
+Cuando el instrumento está enviando "a nivel de aplicación del Protocolo
+ Mensajes "para el computadora, se debe determinar una prioridad para cada uno
+ mensaje, en el caso de que más de un tipo de mensaje es
+ pendientes.
+ El mensaje de encuesta es un curso de "fondo" del mensaje, y
+ asume la prioridad más baja. Los mensajes de consulta y el resultado se
+ impulsado por los acontecimientos en tiempo real y por lo tanto suspender el mensaje de encuesta.
+ En términos de prioridad, el orden es:
+ Prioridad de mensajes
+ Resultado más alto
+ CALIBRACIÓN RESULTADO
+ CONSULTA
+ BAJO LA ENCUESTA
+ Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo
+ 09/2002 2-2 D00396
+ Encuesta mensaje
+ Dimension ® sistema de química clínica
+ enviar / recibir en modo
+ enviar ID / 
+
+
+modo de recepción
+ Este mensaje es enviado por el instrumento para informar al computadora que la
+ instrumento está listo para recibir la solicitud la siguiente prueba. Proporciona
+ información para ayudar al computadora en la identificación de la muestra del portador.
+
+
+ Campo				Max 		Longitud de datos
+ TIPO 				1 		P
+ ID 				5 		alfanumérico
+ PRIMERA ENCUESTA 		1 		1 inicial encuesta 0 encuesta de conversación
+ SOLICITUD 			1 		0 ocupado enviar ninguna solicitud 1 enviar una solicitud de
+ # DE PORTADORES 		2		0-99
+
+ Repite para cada portador conocido
+ 
+Portador de la muestra ID 	1		vacío 1 (0), A o B
+
+ NOTA: El campo de la identificación de muestras Transportista estará vacía para todos Dimension ®
+ los modelos, excepto el instrumento AR Dimension ®.
+
+
+Escuchar
+Leer fonéticamente
+Diccionario - Ver diccionario detallado
+
+Instrumento de identificación de campo
+
+ Este valor se establece por el cliente para identificar de forma única dimensión ®
+ sistemas de química clínica, que las distinguen de otros en multiinstrument
+ configuraciones. El computadora puede utilizar el valor en
+ inicialización para identificar y validar el instrumento, las asignaciones de puertos
+ especificadas en los cuadros de configuración de la computadora.
+
+Primera encuesta de campo
+
+ A 1 (encuesta inicial) en este campo indica que el instrumento está tratando de
+ establecer la comunicación durante el encendido, la recuperación de fallo de alimentación,
+ selección de la interfaz de la computadora por el usuario, o la comunicación
+ condiciones de recuperación de errores. Hasta que el computadora responde con una muestra
+ solicitar o no mensaje de solicitud, el valor del campo seguirá siendo 1. Cuando
+ cualquiera de estos mensajes se reciben, el valor del campo se establece en 0
+ (encuesta de conversación) y sigue siendo 0 hasta que cualquiera de los arriba indicados
+ condiciones se producen. El valor es usado por la computadora para determinar la
+ el estado del instrumento durante la operación. Este mecanismo proporciona el
+ ordenador con la información que necesita para determinar si el
+ comunicación con el instrumento fue interrumpido mientras que la muestra
+ solicitudes estaban pendientes. El valor de este campo debe ser (0)
+ descargar una solicitud de la LIS.
+ Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del  protocolo de mensajes y cuadros de diálogo
+ 09/2002 2-3 D00396
+ 
+Solicitud de campo
+
+ El instrumento puede contener a las solicitudes de procesamiento de la muestra utilizando este 
+ campo, manteniendo al mismo tiempo el nivel de aplicación el diálogo de comunicación. 
+ Esto se hace estableciendo el valor de campo a 0, que indica "Instrumento 
+ Ocupado "y que no se aceptarán pedidos. La dimensión ® sistema 
+ alarga el ciclo de sondeo para que la prioridad para ejecutar otros procesos. 
+ (Ver Sección 2.12.1, calendario, página 39 para más detalles.) Cuando el valor 
+ se establece en 1, las solicitudes pueden fluir de nuevo. 
+
+# Campo de transportistas 
+
+ Este campo indica el número total de compañías de la muestra se conoce a la 
+ instrumento. El instrumento acepta un portador de la muestra activa y una 
+ en espera de portador de la muestra a la vez. El número total de solicitudes de muestras 
+ con enviar ID / modo de recepción no podrá superar el límite de instrumento de 
+ 300. El número de compañías de la muestra será 0 si no es portador de la muestra 
+ sabe que el instrumento. 
+
+NOTA: Este campo sólo es compatible con la dimensión ® AR 
+instrumento. 
+
+Portador de ID de la muestra Campos 
+El número de estos campos se especifica en el campo N º de portadores. Si el 
+número de portadores es 0, no hay muestra Transportista campos de identificación y no 
+<FS> Correspondientes s. Cada portador de la muestra sabe que el instrumento 
+tiene un campo ID. Si la solicitud de la muestra se introduce en el instrumento, el 
+operador especifica el identificador de portador de la muestra en el instrumento. Si el 
+solicitud se introduce en la computadora, el computadora selecciona el instrumento 
+y envía el identificador de portador de la muestra en el instrumento de la muestra 
+Mensaje de la petición. El ordenador asigna el identificador de portador de la muestra sólo para 
+las compañías que son desconocidos para el instrumento. Para el single 
+muestra de entrada en el ordenador (si el instrumento no tiene muestra conocida 
+portador), el computadora asigna el identificador de portador de la muestra con un ID de Loadlist 
+ámbito de la 0, y la primera muestra de transmisión como la posición de la muestra 1. (Véase 
+Sección 2.3, página 16, campo ID Loadlist y la Sección 2.3, página 18, 
+Muestra los campos de posición.) 
+NOTA: Esta función sólo es compatible con la dimensión ® AR 
+instrumento. Para todas las dimensiones de otros instrumentos ®, este campo 
+estará en blanco.
+
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 2-4 D00396 
+Ejemplos: 
+• Primera Encuesta, no de muestras del conocido 
+<STX> P <FS> 92.300 <FS> un <FS> un <FS> 0 <FS> 6C <ETX> 
+• Encuesta de conversación, muestra un portador conocido por instrumento 
+<STX> P <FS> 92.300 <FS> 0 <FS> un <FS> un <FS> Un <FS> C9 <ETX> 
+• Encuesta de conversación, ocupado Instrumento, envíe ninguna solicitud 
+<STX> P <FS> 92.300 <FS> <FS> 0 0 1 <FS> <FS> Un <FS> C8 <ETX> 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 2-5 D00396 
+
+Ejemplo de mensaje de solicitud 
+Dimension ® sistema de química clínica 
+enviar / recibir en modo 
+enviar ID / modo de recepción 
+Este mensaje se envía al instrumento en respuesta a la encuesta [P] 
+
+Mensaje y que también se utiliza para la respuesta a una consulta de [I] mensaje. Campos 
+con datos que está vacía son campos opcionales, todos los demás son obligatorios. 
+
+
+                    /*                   Max
+                    Field                Length          Data     
+                    TYPE                 1               D
+                    SAMPLE CARRIER ID    1               0, A or B
+                    LOADLIST ID          2               0-99 (0 indicates single sample request) 
+                    TRANSACTION          1               Add sample (A) Delete (D),
+                    PATIENT ID           27              Empty or alphanumeric
+                    SAMPLE #             12              Alphanumeric
+                    SAMPLE TYPE          1               1 to 9 or W
+                    LOCATION             6               Empty or alphanumeric
+                    PRIORITY             1               0-4
+                    # OF CUPS FOR SAMPLE 1               1to 9 
+
+                    Iterated # of sample cup times
+
+                    CUP POSITION         2               0 or 1-60, or "*"
+                    DILUTION             3               1-100
+                    # OF TESTS           2               1 to instrument limit
+
+                    Iterated # of test times for each sample cup
+
+                    TEST NAME            5               Member of set of test mnemonics
+                                                         recognized by the instrument
+
+
+                    D|0|0|A|106|0305041|1||1|1|**|1|1|GLU|94
+                    */
+
+
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo
+
+09/2002 2-6 D00396
+Muestra de Operador de Campo (Dimension ® sistema de AR solamente) 
+
+
+ 
+y la identificación del portador es asignado por el instrumento después de la descarga. 
+Para las solicitudes de una única muestra de entrada en la computadora cuando no 
+las compañías de la muestra se sabe que el instrumento, este campo debe 
+contienen un identificador de portador de la muestra asignado por el ordenador. El transportista 
+se sabe que el instrumento a la recepción de esta solicitud. 
+Cargar Lista de campos de ID 
+
+La descarga de la lista de carga se inicia con la primera solicitud que tiene una carga 
+ID de la lista mayor que 0 y termina con el siguiente mensaje no Solicitudes. 
+
+Múltiples listas de carga para la compañía misma muestra se podrán enviar durante el 
+descarga, cada uno con su propia identificación lista de carga. peticiones de la muestra debe ser 
+agrupados por identificador de carga lista. Todas las listas de carga debe estar completamente en una muestra 
+portador. 
+
+El instrumento sólo para aceptar la descarga de un desconocido 
+muestra de compañía. Un portador de la muestra se conoce al instrumento 
+
+cuando una solicitud de la muestra se introduce por ella, ya sea en el instrumento 
+teclado o al recibir una descarga de muestras o una sola muestra 
+petición de la computadora. Una vez que el portador de la muestra se sabe que 
+el instrumento, cualquier solicitud posterior de ésta debe ser enviada en individuales 
+muestras con un campo de carga de lista de ID 0. 
+NOTA: Este campo debe ser cero (0) a menos que desee utilizar la carga 
+Lista de funciones en un instrumento AR Dimension ®. 
+Transacción de campo 
+Este campo indica que el instrumento del tipo de la función a realizar. 
+Un Indica el instrumento para agregar una solicitud de muestras asociadas a 
+un número de la muestra.
+
+D Pide la supresión de una solicitud de muestras previamente descargados. 
+Eliminación no puede ocurrir una vez que la solicitud se ha presentado para su 
+procesamiento por el operador del instrumento. Si existe esta condición, el 
+solicitud es rechazada. 
+NOTA: Para eliminar una muestra de anyDimension systemyou ® debe 
+descargar la solicitud en su totalidad con una (D) en la Operación 
+campo, de lo contrario la solicitud de la muestra será rechazada. 
+
+Identificación del paciente de campo 
+-----------------------------------------------------------------------------------------------------
+
+Este campo contiene una cadena alfanumérica de carácter único a cada 
+paciente. Puede ser un nombre o número de pacientes. También puede estar vacío. Un 
+campo vacío se compone de dos separadores de campo, <FS> <FS>. 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 2-7 D00396 
+
+Muestra de campo # 
+
+Este es un número único para cada solicitud de muestra asignado por el 
+operador, cuando los datos de la muestra se introduce en el LIS o instrumento. La 
+instrumento mantiene este número con las peticiones de la muestra en su 
+base de datos. 
+
+Muestra el tipo de campo
+
+Información sobre el tipo de muestra se comunica como alfanuméricos 
+código. El código y lo que se muestra en el instrumento se 
+se muestra a continuación. 
+
+Código alfa numérico de pantalla del instrumento 
+W de sangre entera 
+1 suero 
+2 de plasma 
+3 orina 
+4 LCR 
+5 de 1 ° grado de control de calidad 
+6 2 º nivel de control de calidad 
+7 3 º nivel de control de calidad 
+8 cuarto nivel de control de calidad 
+9 quinto nivel de control de calidad 
+NOTA: Alfa Código numérico 8 y 9 se utilizan para la orina QC1 y 2 
+Ubicación del Campo 
+contenido de este campo se decidió por el laboratorio. Un posible uso es 
+para especificar la ubicación del paciente en el hospital. El campo puede ser 
+vacío. Un campo vacío se compone de dos separadores de campos, <FS> <FS>. 
+Prioridad de campo 
+Información acerca de la prioridad de la muestra se comunica como un entero 
+código. El código y lo que se muestra en el instrumento se muestran 
+a continuación.
+Entero
+Código
+Instrumento
+Mostrar
+0 rutina
+Un STAT
+2 lo antes posible
+3 Control de Calidad
+4 XQC (usado para la cruce de control de calidad)
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo
+09/2002 2-8 D00396
+# De la muestra de campo Copas
+Un número variable de vasos puede ser requerido para cada muestra. Este
+número varía según la prueba de los requisitos. Cada prueba requiere
+pre-tratamiento se requiere un recipiente para muestras independientes. Este campo indica
+el número de tazas solicitado y define el número de iteraciones del
+la posición de la muestra, dilución, y # de campos de pruebas que siguen en el
+mensaje.
+Muestra los campos de la Copa de posición
+El número de estos campos se especifica en el campo N º de Copas. No
+debe ser por lo menos 1. Este campo forma parte del grupo reiteró que consiste en
+Muestra posición, dilución y # de campos pruebas. las posiciones de muestra en
+las compañías de la muestra sabe que el instrumento son asignados por el
+instrumento. las posiciones de muestra a las compañías de la muestra que son desconocidos para
+el instrumento se asignan por la computadora. La posición de la muestra
+de campo en este mensaje contiene un valor positivo sólo si el computadora está
+la asignación de posiciones de la muestra, de lo contrario es 0. Las muestras que se
+identificados por sus etiquetas con códigos de barras que contienen una "**" para este campo.
+Esto indica que ninguna asignación posición de la taza se producirá hasta que el
+muestra ha sido identificado por el instrumento.
+NOTA: Sólo se puede asignar una posición de la taza sobre la Dimensión ® AR
+instrumento
+Dilución de Campos
+El número de estos campos se especifica en el campo N º de Copas. No
+será por lo menos uno, y el valor por defecto del campo es de 1. Este campo es un
+parte del grupo interated que consiste en la muestra de posición, dilución y
+# De los campos de pruebas. El número de dilución de 3 dígitos es el valor de la medida
+resultado se multiplica por para compensar la dilución de la muestra. La
+rango es de 0 a 10 0.
+Ejemplo: El resultado de medición = 1,0
+Dilución = 10.0
+resultado reportado = 10.0
+# Los campos de pruebas
+El número de estos campos se especifica en el # de campo muestra Copas.
+Habrá al menos 1. Este campo es una parte del grupo reiteró
+que consiste en la muestra de posición, dilución, y # de campos de pruebas. Un
+número variable de pruebas puede ser solicitada por cada taza de la muestra. Este
+campo indica el número de pruebas que se solicitan y se definen las
+número de iteraciones del campo Nombre de la prueba que seguirá en el
+mensaje.
+
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 2-9 D00396 
+Prueba de Campos Nombre 
+El número de estos campos por muestra se especifica en el # de Pruebas 
+campo. Habrá al menos 1. El instrumento debe estar configurado para 
+tienen posiciones únicamente para la colocación de recipientes de muestras. Debido a la flexibilidad 
+la naturaleza de la química de los reactivos asociados con la dimensión ® 
+sistema, la colección de la prueba es grande y va a cambiar a medida que los nuevos métodos son 
+puesto a disposición del cliente. Por esta razón se sugiere que el 
+la colección de prueba de estar en manos del cliente. Apéndice II se ofrece una 
+Índice de las pruebas que actualmente pueden ser parte de la prueba del analizador 
+biblioteca. 
+NOTA: Todos los campos de nombre de prueba debe estar en mayúsculas 
+Ejemplos: 
+• Modelo de solicitud de un tubo de código de barras. 
+<STX> D <FS> 0 0 <FS> <FS> Un <FS> 106 <FS> 0.305.041 <FS> un 
+<FS> <FS> Un <FS> un <FS> ** <FS> un <FS> un <FS> GLU <FS> 94 <ETX> 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 10.02 D00396 
+Ningún mensaje de solicitud 
+Dimension ® sistema de química clínica 
+enviar / recibir en modo 
+ID enviar / recibir 
+Este flujo de datos es enviado por el LIS para indicar que no hay pruebas 
+solicita que se descargaron. Es la respuesta del computadora a la encuesta 
+mensaje que indica el final de una descarga, y también es el 
+computadora de respuesta al mensaje de consulta que indica que no se muestra 
+que se encuentran. Es la respuesta predeterminada del computadora a la inicial y 
+encuesta de conversación del instrumento. 
+Campos mensaje 
+Campo 
+Max 
+Longitud de datos 
+TIPO 
+No hay campos de datos 
+1 N 
+Ejemplo: 
+• Sólo el posible mensaje 
+<STX> N <FS> 6A <ETX> 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.11 D00396 
+Espere mensaje 
+Dimension ® sistema de química clínica 
+enviar / recibir en modo 
+enviar ID / modo de recepción 
+Este mensaje es enviado por el computadora cuando un "instrumento ocupado" encuesta 
+se recibe un mensaje durante una descarga de la lista de carga o para evitar que 
+la terminación de la descarga de una solicitud rechazada. El mensaje de espera es 
+enviado por lo que el instrumento no se baja de la lista de carga, pero se permiten 
+la lista de carga a seguir cuando el instrumento es capaz de aceptar más 
+peticiones, o de la solicitud rechazada se ha corregido o anulado. 
+Campos mensaje 
+Campo 
+Max 
+Longitud de datos 
+TIPO 
+No hay campos de datos 
+1 W 
+Ejemplo: 
+• • Sólo es posible mensaje 
+<STX> W <FS> 73 <ETX> 
+NOTA: Este mensaje sólo se debe usar sobre la Dimensión ® AR 
+instrumento. 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.12 D00396 
+Solicitud de aceptación de mensajes 
+Dimension ® sistema de química clínica 
+enviar / recibir en modo 
+enviar ID / modo de recepción 
+Este mensaje es la respuesta del instrumento a la muestra de computadora 
+Mensaje de la petición. 
+Campos mensaje 
+Campo 
+Max 
+Longitud de datos
+
+TIPO 1 M 
+SITUACIÓN 1 Aceptar (A), Rechazar (R) 
+RAZÓN 2 Acepte (campo vacío), Rechazar (1-8) 
+Portador de la muestra ID 1 0, A o B 
+# DE COPAS DE MUESTRA 1 a 9 en 
+Repitió el número de veces copa de muestra 
+POSICIÓN DE LA MUESTRA 2 0, 10 a 60, o "*" 
+Estado de los campos 
+El estado sólo indica la aceptación o el rechazo de la solicitud anterior. Si 
+una copa de muestra de los varios en la solicitud tiene un problema, el conjunto 
+solicitud es rechazada. No hay solicitudes aceptadas parcial. 
+Razón de campo 
+Para las solicitudes rechazadas, el campo de la Razón da una de las siguientes 
+códigos de razón para el rechazo, de lo contrario, está vacío. Un campo vacío 
+consta de dos separadores de campo, <FS> <FS>. 
+Código de razón 
+1 Solicitar en el proceso 
+2 Resultados de la ya no está disponible 
+3 Muestra compañía en uso 
+4 No hay memoria para almacenar solicitud 
+5 Error en la solicitud de prueba 
+6 (Reservado) 
+7 Muestra portadora completa 
+8 No es portadora 
+9 Tipo de fluido incorrecto 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 13.02 D00396 
+Portador de ID de la muestra de campo 
+Para obtener una respuesta positiva, este campo indica el ID de la compañía aérea que 
+solicitud se le asignó. Para obtener una solicitud rechazada este campo siempre será 0. 
+# De la muestra de campo Copas 
+Un número variable de tazas de la muestra puede ser requerido para cada muestra. 
+Este número varía según la prueba de los requisitos. pruebas pretratados se 
+requieren tazas separadas de la muestra. Este campo indica el número de 
+copas de muestra que se solicita y el número de la muestra campos de posición 
+que siguen en el mensaje. Para las solicitudes rechazadas, este campo siempre 
+el 1. 
+Muestra los campos de posición 
+El número de estos campos se especifica en el # de campo muestra Copas. 
+Habrá al menos 1. Para las solicitudes relacionadas con los tubos con código de barras 
+la positionwill ser un "*". El orden de taza de la muestra en estos ámbitos puede ser 
+afectados por la configuración del instrumento. Para las solicitudes rechazadas, esto 
+campo siempre será 0. 
+las posiciones de muestra a las compañías de la muestra sabe que el instrumento se 
+asignado por el instrumento. Muestra las posiciones de las compañías de la muestra que 
+el instrumento no sabe nada son asignados por el computadora. La 
+Ejemplo de valor de campo de posición está bien asignado por el instrumento o una 
+copia del valor se envía en el mensaje de solicitud de muestras. 
+Ejemplos: 
+• Aceptar. Dos tazas de la muestra asociada a la solicitud. 
+M <STX> <FS> Un <FS> <FS> Un <FS> <FS> 2 2 3 <FS> <FS> 2A <ETX> 
+• Aceptar. Tubo de muestra con código de barras. 
+M <STX> <FS> Un <FS> <FS> Un <FS> un <FS> <FS> D2 <ETX> 
+• Rechazar, debido a de error en la solicitud. 
+M <STX> <FS> R <FS> 5 <FS> <FS> 0 1 0 <FS> <FS> 0D <ETX> 
+• Rechazar por tipo de fluido incorrecto. 
+M <STX> <FS> R <FS> 9 <FS> <FS> 0 1 0 <FS> <FS> 0F <ETX> 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.14 D00396 
+Consulta de mensajes
+
+Dimension ® sistema de química clínica 
+enviar ID / modo de recepción 
+Este mensaje es enviado por el instrumento de consulta de la computadora por un 
+solicitud de muestras específicas. Proporciona la identificación de la muestra solo y espera 
+o una muestra RequestMessage con datos de ejemplo válido, o un no 
+Solicitud mensaje que indica que no se encuentran muestras que se combina con ID. La 
+ID de la muestra debe coincidir con el campo de identificación de la muestra en el Modelo de solicitud o 
+el mensaje será rechazado. 
+Campos mensaje 
+Campo 
+Max 
+Longitud de datos 
+TIPO 1 I 
+ID de la muestra 12 Alfanumérico 
+Ejemplo: 
+• Consulta para la muestra ID 043092011. 
+<STX> Me <FS> 043092011 <FS> 45 <ETX> 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.15 D00396 
+Resultados de mensaje de aceptación 
+Dimension ® sistema de química clínica 
+enviar / recibir en modo 
+enviar ID / modo de recepción 
+Esta es la respuesta a la computadora de Resultados y calibración del instrumento 
+Resultados de mensajes. Al recibir este mensaje de la computadora, el 
+instrumento marca el resultado como si hubiera sido enviado con éxito. 
+Campos mensaje 
+Datos de Campo Largo 
+TIPO 1 M 
+SITUACIÓN 1 Aceptar (A), Rechazar (R) 
+RAZÓN 2 Acepte (campo vacío), 
+Rechazar (1) 
+Condición Jurídica y Social de campo 
+El estado sólo indica la aceptación o el rechazo de último resultado. 
+Razón de campo 
+Para las solicitudes rechazadas, el campo de la razón da el código siguiente razón: 
+de rechazo, de lo contrario, está vacío. Un campo vacío se compone de dos 
+separadores de campo, <FS> <FS>. 
+Código de razón 
+Un computadora fuera de la memoria 
+Ejemplos: 
+• Aceptar. 
+<STX> M <FS> Un <FS> <FS> E2 <ETX> 
+• Rechazar por ordenador está fuera de la memoria. 
+M <STX> <FS> R <FS> un <FS> 24 <ETX> 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.16 D00396 
+Resultados de mensaje 
+Dimension ® sistema de química clínica 
+enviar recibir 
+enviar ID / modo de recepción 
+enviar sólo en el modo 
+Este mensaje se envía al computadora cuando todas las pruebas para una muestra 
+solicitud han sido procesados en el instrumento. El mensaje contiene 
+resultados o información de errores para todas las pruebas solicitadas. 
+Cuando un instrumento se establece comunicación con un ordenador, 
+explora su base de datos para todas las solicitudes de muestras que no han completado 
+sido transmitida a la computadora. El instrumento de comunica 
+resultados como parte del procedimiento de recuperación automática, aprovechando 
+de ayuda de la batería del instrumento durante el corte de energía y sus datos 
+capacidad de almacenamiento. 
+Si el resultado es rechazada por el computadora con un resultado de aceptación 
+mensaje, el instrumento sigue tratando de enviar el resultado y no 
+enviar ningún mensaje encuesta para recabar las solicitudes de muestras. El instrumento 
+señales al usuario que el computadora no va a aceptar los resultados. El usuario 
+debe aclarar la situación en el computadora. Si no se borra y después de 50 
+los intentos (a intervalos de 15 segundos) para transmitir tanto, el instrumento 
+deja de comunicación. La comunicación debe ser restituido por el 
+operador.
+
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.17 D00396 
+Campo 
+Max 
+Longitud de datos 
+TIPO 1 R 
+LOADLIST ID 2 0-99, "*" 
+Identificación del paciente 27 alfanuméricos 
+EJEMPLO # 12 vacíos, alfanuméricos 
+TIPO DE MUESTRA en 1 a 9 o W 
+UBICACIÓN 6 vacíos, alfanuméricos 
+PRIORIDAD 1 0-4 
+TIEMPO DE FECHA 12 ssmmhhddmmyy 
+# DE COPAS DE MUESTRA 1 a 9 en 
+Iterado número de veces que la taza de la muestra 
+DILUCIÓN 3 1-100 
+# DE PRUEBAS 2 1 para limitar instrumento 
+Iterado número de veces que la prueba para cada taza de la muestra 
+PRUEBA DE NOMBRE cinco miembros de un conjunto de teclas de acceso de prueba 
+reconocido por el instrumento 
+RESULTADO DE LA PRUEBA 10 alfanuméricos, "." "-", "E" 
+10 unidades vacías, alfanuméricos, "/", "%", "_" 
+ERROR CÓDIGO 2 alfanumérico 
+Loadlist identificador de campo 
+Los resultados de las solicitudes que se originó en el instrumento (es decir, no entró 
+a través de la computadora), tienen una identificación Loadlist igual a "". muestra individual 
+peticiones transmitidas por el ordenador dispone de una ID Loadlist igual a cero 
+(0). Un valor mayor que cero (0) indica que el resultado es parte de un 
+Loadlist. 
+NOTA: Con el apoyo de Dimension ® instrumento AR solamente. 
+Identificación del paciente de campo 
+Este campo contiene una cadena alfanumérica de carácter único a cada 
+paciente. Puede ser un nombre o número de pacientes. También puede estar vacío. Un 
+campo vacío se compone de dos separadores de campo, <FS> <FS>. 
+Muestra de campo # 
+Este es un número único para cada solicitud de muestra asignado por el 
+operador, cuando los datos de la muestra se introduce en el LIS o instrumento. La 
+instrumento mantiene este número con las peticiones de la muestra en su 
+base de datos. 
+Muestra el tipo de campo 
+Información sobre el tipo de muestra se comunica como alfanuméricos 
+código. El código y lo que se muestra en el instrumento se 
+se muestra a continuación. 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 18.02 D00396 
+Ubicación del Campo 
+contenido de este campo se decidió por el laboratorio. Un posible uso es 
+para especificar la ubicación del paciente en el hospital. El campo puede ser 
+vacío. Un campo vacío se compone de dos separadores de campos, <FS> <FS>. 
+Prioridad de campo 
+Información acerca de la prioridad de la muestra se comunica como un entero 
+código. El código y lo que se muestra en el instrumento se muestran 
+a continuación. 
+Fecha de campo Tiempo 
+La hora y fecha en que la solicitud sea presentada en el instrumento. La 
+formato ssmmhhddmmyy se interpreta como pares de caracteres que representa 
+en secuencia: segundos, minutos, horas, días, meses y años. 
+# De la muestra de campo Copas 
+Un número variable de tazas de la muestra puede ser requerido para cada muestra. 
+Este campo indica el número de tazas de la muestra requerida y define 
+el número de iteraciones de: dilución, # de pruebas, Nombre de la prueba, prueba 
+Resultados, unidades y campos de código de error que siguen en el mensaje. 
+La dilución de campo 
+El número de estos campos se especifica en el # de la muestra de campo Copas, 
+Habrá al menos uno. Este campo forma parte del grupo de iterado 
+campos que consiste en: dilución, # de pruebas, Nombre de la prueba, los resultados de prueba, 
+Unidades, y los campos de código de error. 
+El número de dilución de 3 dígitos es el valor medido es el resultado de la 
+multiplicado por la dimensión ® para compensar la dilución de la 
+muestra. 
+# Campo de Pruebas 
+El número de estos campos se especifica en el # de campo muestra Copas. 
+Habrá al menos uno. Este campo es una parte del grupo de iterados 
+campos que consiste en: dilución, # de pruebas, Nombre de la prueba, Unidades de prueba 
+Resultados, y los campos de código de error. 
+Un número variable de pruebas puede ser solicitada por cada taza de la muestra. Este 
+campo indica el número de pruebas que se solicitan y se definen las 
+número de iteraciones del campo Nombre de la prueba que seguirá en el 
+mensaje.
+Escuchar
+Leer fonéticamenteDiccionario - Ver diccionario detallado
+
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 19.02 D00396 
+Prueba de Campo Nombre 
+El número de estos campos por taza de la muestra se especifica en el # de Pruebas 
+campo. Habrá al menos uno. 
+El aparato debe estar configurado para tener posiciones únicamente para 
+muestra la colocación de la taza. Debido a la naturaleza flexible de la química 
+reactivos asociados con el sistema Dimension ®, la colección de prueba es 
+grandes y cambiará a medida que nuevos métodos se ponen a disposición del 
+cliente. Por esta razón se sugiere que la biblioteca se prueba en el 
+manos del cliente. ANEXO II se presenta una tabla de las pruebas 
+que en la actualidad puede ser parte de la colección de la prueba del analizador. 
+Resultados de la Prueba de Campo 
+El número de estos campos por taza de la muestra se especifica en el # de Pruebas 
+campo. Habrá al menos uno. 
+El resultado de la prueba se incluye en este ámbito si no se produce un error que causa 
+que el resultado sea suprimida. 
+El resultado es una cadena de caracteres 10.1. Puede contener alfanuméricos 
+caracteres, los dígitos, 0-9, signo negativo, "-", "e", y un punto decimal, 
+o el período, según proceda, para representar el valor del resultado en fijos o 
+formato de punto flotante. Véase el Capítulo 1: Información General, "Mensaje 
+Formato ". 
+Para los errores que suprimen el resultado, el campo de resultados está vacío. El error 
+código será en el campo de código de error. 
+Algunos métodos que se calibran los resultados cualitativos: NOTA 
+informe a cabo en punto de venta. o NEG. dependiendo de la concentración 
+nivel. 
+Unidades de Campo 
+Unidades de medida utilizada en los informes resultados de las pruebas. 
+Error Código de campo 
+Debido a la naturaleza flexible de la química de los reactivos asociados 
+con el sistema Dimension ® los códigos de error son variados y el cambio 
+como nuevos métodos se ponen a disposición del cliente. Por esta razón se 
+Se sugiere que la biblioteca de códigos de error en las manos del cliente. 
+Apéndice III contiene una tabla de los errores que en la actualidad puede ser 
+parte de la biblioteca analizador de código de error. 
+Ejemplos: 
+• Muestra pidió al instrumento 
+<STX> R <FS> <FS> 279-38-000 <FS> 043092005 <FS> un <FS> <FS> 
+0 <FS> 174513190302 <FS> un <FS> un <FS> dos <FS> GLU <FS> 85.00 <FS> 
+mg / dl <FS> 
+BUN <FS> <FS> <FS> 7 mg / dl <FS> <FS> 0C <ETX> 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 20-20 D00396 
+• Muestra pidió al instrumento (código de error cuando se suprime la 
+resultado) 
+<STX> R <FS> <FS> <FS> 1596 <FS> un <FS> <FS> <FS> 0 420 111 230 702 
+<FS> Un <FS> 
+1 <FS> 5 <FS> NA <FS> <FS> <FS> 11 <FS> K <FS> <FS> <FS> 11 <FS> CL 
+<FS> <FS> <FS> 11 
+<FS> TCO2 <FS> <FS> <FS> 11 <FS> CREA <FS> <FS> 0,2 mg / dl <FS> 3 
+<FS> CB <ETX> 
+• Muestra pidió al instrumento (cuando el código de error no 
+suprimir el resultado) 
+<STX> R <FS> <FS> <FS> 1519 <FS> un <FS> <FS> <FS> 0 594 513 230 702 
+<FS> Un <FS> 
+1 <FS> un <FS> CK <FS> 2590 <FS> U / L 3 <FS> <FS> <ETX> AE 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 2-21 D00396 
+Resultados de la calibración mensaje 
+Dimension ® sistema de química clínica 
+enviar / recibir en modo 
+enviar ID / modo de recepción 
+Estos datos son enviados a la computadora cuando se obtiene una calibración. 
+Campo 
+Max
+
+Longitud de datos 
+TIPO 1 C 
+PRUEBA DE NOMBRE cinco miembros de un conjunto de teclas de acceso de prueba 
+reconocido por el instrumento 
+UNIDADES 10 alfanuméricos, "/" y "%" 
+NÚMERO DE LOTE 10 alfanuméricos 
+CALIBRADOR 10 miembros del conjunto de los calibradores y 
+verificadores reconocidos por la 
+instrumento 
+CALIBRADOR LOT 
+NÚMERO 
+10 Alfanumérico 
+OPERADOR 10 Alfanumérico 
+TIEMPO DE FECHA 12 ssmmhhddmmyy 
+PENDIENTE 10 numérico, "." "-", "E" 
+INTERCEPT 10 numérico, "." "-", "E" 
+# DE COEFICIENTES 2 a 5 feb 
+Repetido número de veces que los coeficientes de 
+Coeficientes numéricos 10, "." "-", "E" 
+# 3 a 5 febrero VALORES DE BOTELLA 
+# Repetidas veces el valor de la botella 
+VALOR DE BOTELLA 10 numérico, "." "-", "E" 
+# DE LOS RESULTADOS 2do al 3ro febrero 
+Repetida de los resultados # x # de veces el valor de la botella 
+RESULTADO 10 numérico, "." "-", "E" 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 22.02 D00396 
+Prueba de Campo Nombre 
+El número de estos campos por muestra se especifica en el # de Pruebas 
+campo. Habrá al menos 1. El instrumento debe estar configurado para 
+tienen posiciones únicamente para la colocación de recipientes de muestras. Debido a la flexibilidad 
+la naturaleza de la química de los reactivos asociados con la dimensión ® 
+sistema, la colección de la prueba es grande y va a cambiar a medida que los nuevos métodos son 
+puesto a disposición del cliente. Por esta razón se sugiere que el 
+la colección de prueba de estar en manos del cliente. ANEXO II se ofrece una 
+Índice de las pruebas que actualmente pueden ser parte de la prueba del analizador 
+biblioteca. 
+Unidades de Campo 
+Unidades de medida utilizada en los informes resultados de las pruebas. 
+Lote Número de Campo 
+El número de lote del reactivo que se está calibrando está contenida en el presente 
+campo. 
+Calibrador de campo 
+Los calibradores y verificadores son instrumento de tipo dependiente. Algunos de los 
+mnemónicos calibrador más comunes se enumeran a continuación y se encuentran entre 
+los comunicados en el ámbito del calibrador. 
+Calibrador Mnemonic 
+Verificador CK CK-V 
+Verificador CKMB CKMB-V 
+T4 Calibrador T4-C 
+TU TU calibrador-C 
+Chol Chol calibrador-C 
+Calibrador HDL HDL-C 
+TBIL / TBIL calibrador DBIL / DBIL-C 
+CHEM me calibrador CHEM-C 
+Verificador enzima Enz-V 
+IRN / IRN calibrador TIBC / TIBC-C 
+Medicamentosas calibrador-C 
+Verificador ACP ACP-V 
+AMON AMON calibrador-C 
+Número de lote del calibrador de campo 
+El número de lote del producto calibrador o verificador utilizado para este 
+calibración se transmite en este campo. 
+Operador de campo 
+El nombre o código del operador que realiza la calibración se pone en 
+este campo. 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.23 D00396 
+Fecha de campo Tiempo 
+La hora y fecha en que la solicitud sea presentada en el instrumento. La 
+formato ssmmhhddmmyy se interpreta como pares de caracteres que representa 
+en secuencia: segundos, minutos, horas, días, meses y años. 
+Pendiente de campo 
+El campo de pendiente contiene la pendiente de la recta de regresión lineal, trazando 
+valores de botella frente a las concentraciones medidas. Para el formato numérico de 
+datos, consulte el Capítulo 1: Información General, "de formato de mensajes". 
+Intercepción de campo 
+El campo de interceptar contiene la intersección de la recta de regresión lineal. 
+Para el formato de datos numéricos, vea el Capítulo 1: Información general, 
+"Formato de mensaje". 
+# Campo de coeficientes 
+Este campo especifica el número de campos Coeficiente de seguir. 
+Coeficiente de Campos 
+Los nuevos coeficientes calculados a partir de los cálculos de calibración 
+comunicado en estos campos. Para el formato de datos numéricos, véase el capítulo 
+1: Información General, "de formato de mensajes". 
+# De botella los valores del campo 
+Para cada valor de la botella existe 2-3 resultados y los residuos. Cada 
+valor de la botella tiene un grupo de campos asociados, que consiste en una botella 
+Valor, # de los resultados, y los campos de resultados. Este campo especifica el número 
+de los grupos de campo a seguir. 
+Los campos de la botella de valor 
+El calibrador / verificador producto está empaquetado de 3 a 5 niveles para generar 
+varias concentraciones conocidas o valores botella. Estos valores se 
+especificados en los campos de la botella de valor. Para el formato de datos numéricos, consulte 
+Capítulo 1: Información General, "Formato de mensaje". 
+# De Campo Resultados 
+Este campo especifica el número de resultados para el actual valor de la botella 
+campo.
+
+Resultados de Campo 
+Para el formato de datos numéricos, vea el Capítulo 1: Información general, 
+"Formato de mensaje". 
+No hay mensajes de error en este campo, ya que hay para el examen 
+Resultado de campo. 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 24.02 D00396 
+Ejemplo: 
+• Tres valores de la botella con dos pruebas por valor de la botella. 
+<STX> C <FS> <FS> GLU MG / DL <FS> FA3406 <FS> CHEM-C <FS> 
+CC2456 <FS> 
+GEORGE <FS> 053121100386 <FS> 1,05 0,35 <FS> <FS> dos <FS> 0.768 
+<FS> 1.2E-5 
+<FS> 3 <FS> 10 <FS> dos <FS> 9,5 <FS> 9,6 <FS> 50 <FS> dos <FS> 50,2 <FS> 
+49.9 <FS> 90 
+<FS> Dos <FS> 91,2 91,3 <FS> <FS> FB <ETX> 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.25 D00396 
+Mensajes de Resultados 
+aca ® clínica analizador discreto 
+el modo de simulación 
+Cuando la dimensión ® sistema de química clínica es la simulación de la 
+aca ® analizador clínico discretos, los mensajes son resultado de la prueba 
+orientado por un mensaje de resultado de la prueba. El computadora debe recopilar 
+estos resultados según la muestra, según lo indicado por la Copa de la muestra 
+campo. El instrumento no transmite el resultado hasta que todos los resultados de las pruebas 
+asociadas a la muestra están listos. 
+Mensaje campos son de longitud fija. La siguiente tabla muestra el 
+posiciones de carácter para aca ® analizador de modo de terminal. En ACA ® analizador 
+Informática modo, el aumento de las posiciones por uno que refleje la STX 
+prefijo con ETX como el carácter final. 
+Personaje 
+Posición 
+aca ® IV, V analizador 
+o sistema Dimension ® 
+4.1 Instrumento de identificación 
+5 Espacio 
+6 Espacio 
+9.7 Número de la muestra de la Copa 
+10 Espacio 
+11.14 Resultados de número de secuencia 
+15 Espacio 
+16 Espacio 
+17 Espacio 
+18-19 Factor de dilución (no utilizado) 
+20 Espacio 
+21-29 Muestra de un número de identificación 
+30 Espacio 
+31-32 Método Número 
+33 Espacio 
+34-38 método mnemotécnico 
+39 Espacio 
+40 A 
+41 Espacio 
+42 Menos signo o el espacio 
+43-48 Resultado de la prueba 
+49 Espacio 
+50-51 Código de error 
+52 a 58 espacios 
+59-60 Suma de comprobación 
+61 Retorno de carro 
+62 Línea de alimentación 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.26 D00396 
+Instrumento de identificación de campo 
+Este valor se establece por el cliente para identificar de forma única dimensión ® 
+sistemas de química clínica, que las distinguen de otros en multiinstrument 
+configuraciones. El computadora puede utilizar el valor en 
+inicialización para identificar y validar el instrumento, las asignaciones de puertos 
+especificadas en los cuadros de configuración de la computadora. 
+Sólo los cuatro primeros caracteres de la ID del instrumento se transmiten. 
+Copa de Número de la muestra de campo 
+El número de recipientes de muestras se muestra las posiciones a las compañías de la muestra 
+que son asignados por el instrumento. El número se justifica a la derecha en 
+el campo con ceros a la izquierda, y rangos de 1 a 60. 
+Número de secuencia de resultados de campo 
+El resultado de número de secuencia incrementos por cada nuevo resultado. Cuando 
+el número llega a 9999 a 0000 se restablece automáticamente. También se puede 
+puesta a cero mediante el uso de la rutina de configuración del sistema. El número es 
+justificado a la derecha en el campo con ceros a la izquierda. 
+La muestra de campo Número de ID 
+La muestra es el número de identificación de los nueve primeros dígitos de la Dimensión ® 
+sistema de química clínica muestra de doce dígitos, véase la sección 
+2.3, la muestra de campo #. El número está alineado a la izquierda con un espacio relleno. 
+Método de Número y Themethod Campos Mnemonic 
+La mnemotecnia se dan en el Apéndice II. El número de método está lleno 
+con ceros. La tecla de acceso es justificado a la izquierda con espacio de relleno. 
+Resultados de la Prueba de Campo 
+El resultado de la prueba es justificado a la izquierda en el campo. Sólo seis personajes son 
+disponibles durante cinco dígitos y un punto decimal, por lo tanto, los resultados pueden ser 
+informó con menos cifras significativas thanwhen en un nuevo instrumento de 
+modo de comunicación. 
+Error Código de campo 
+Debido a la naturaleza flexible de la química de los reactivos asociados 
+con el sistema Dimension ® los códigos de error son variados y el cambio 
+como nuevos métodos se ponen a disposición del cliente. Por esta razón se 
+Se sugiere que la biblioteca de códigos de error en las manos del cliente. 
+Apéndice III se proporciona una tabla de los errores que en la actualidad puede ser parte 
+de la biblioteca analizador de código de error. 
+Ejemplos:
+
+• Muestra pidió al instrumento 
+<STX> R <FS> <FS> 279-38-000 <FS> 043092005 <FS> 
+1 <FS> <FS> 
+0 <FS> 174513190302 <FS> un <FS> un <FS> dos <FS> GLU <FS> 85.00 
+<FS> Mg / dl <FS> 
+BUN <FS> <FS> <FS> 7 mg / dl <FS> <FS> 0C <ETX> 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02/27 D00396 
+• Muestra pidió al instrumento (código de error cuando se suprime la 
+resultado) 
+<STX> R <FS> <FS> <FS> 1596 <FS> un <FS> <FS> <FS> 0 420 111 230 702 
+<FS> Un <FS> 
+• 1 <FS> 5 <FS> NA <FS> <FS> <FS> 11 <FS> K <FS> <FS> <FS> 11 <FS> CL 
+<FS> <FS> <FS> 11 
+<FS> TCO2 <FS> <FS> <FS> 11 <FS> CREA <FS> <FS> -0,2 mg / dl <FS> 
+3 <FS> CB <ETX> 
+• Muestra pidió al instrumento (cuando el código de error no 
+suprimir el resultado) 
+<STX> R <FS> <FS> <FS> 1519 <FS> un <FS> <FS> <FS> 0 594 513 230 702 
+<FS> Un <FS> 
+1 <FS> un <FS> CK <FS> 2590 <FS> U / L 3 <FS> <FS> <ETX> AE 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.28 D00396 
+Solicitud de diálogos a nivel de mensaje 
+Todos los mensajes deben ser reconocidos, ya sea sin confirmar o NAK'd por el 
+receptor. La aplicación de las funciones de control de nivel para el intercambio de mensajes 
+mantener un contacto lógico entre el instrumento y el ordenador 
+independientemente de los acuses de recibo (ACK) que se producen en el enlace de datos 
+Control de la capa. 
+Los diálogos de varios de base o de intercambio de mensajes se esquematiza 
+a continuación. 
+• El instrumento está listo para la descarga de la muestra (de votación), mientras que 
+el computadora está funcionando a ralentí con ninguna de las muestras para descargar. 
+Instrumento de Informática 
+Encuesta? 
+solicitud = true 
+primera encuesta = true 
+? ACK 
+? Ninguna solicitud de 
+ACK? 
+o 
+Encuesta? 
+solicitud = true 
+primera encuesta = false 
+? ACK 
+? Ninguna solicitud de 
+ACK? 
+• El instrumento no puede recibir descarga muestra adicional, pero 
+computadora tiene descarga de ejemplo para enviar 
+Instrumento de Informática 
+Encuesta? 
+solicitud = false 
+primera encuesta = true 
+? ACK 
+? esperar la respuesta del sondeo 
+ACK? 
+Secuencia se repite cada 15 segundos, mientras que enlace está activo. 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 02.29 D00396 
+• El instrumento está en la lista para recibir del Estado y el computadora está en 
+Estado de la muestra-download-listo. 
+Instrumento de Informática 
+Encuesta? 
+solicitud = true 
+? ACK 
+? Solicitud de Muestras 
+ACK? 
+Solicitud de aceptación? 
+? ACK 
+• Ciclo de la encuesta se establece en 1 segundo después de una descarga de la muestra ha sido 
+recibido. 
+Instrumento de Informática 
+Encuesta? 
+solicitud = true 
+? ACK 
+? Solicitud de Muestras 
+ACK? 
+• Encuesta de restablecer el ciclo de 15 segundos cuando descarga Loadlist 
+rescindido por la respuesta de la petición no encuesta. 
+• • El instrumento está en el resultado de la transmisión del estado. 
+Instrumento de Informática 
+¿El resultado? 
+? ACK 
+? Resultados de la aceptación 
+ACK? 
+• secuencia se repite hasta que todos los resultados de las pruebas se han protegido 
+transmite a la computadora. 
+• • El instrumento ha encontrado muestra desconocida con el modo de consulta 
+activado. 
+Instrumento de Informática 
+Investigación? 
+? ACK 
+? Solicitud de Muestras 
+ACK? 
+Solicitud de aceptación? 
+? ACK 
+Dimension ® sistema de química clínica Especificaciones de la interfaz de nivel de aplicación del protocolo de mensajes y cuadros de diálogo 
+09/2002 20-30 D00396 
+Tiempo
+
+El sistema Dimension ® química clínica utiliza el mensaje de encuesta a 
+flujo de control del computadora. El intervalo de sondeo se establece en 1 segundo o 
+15 segundos. Esto significa que 1 segundo o 15 segundos después de la última 
+mensaje de la transacción anterior, el instrumento emite el siguiente 
+encuesta mensaje. Cuando no hay solicitudes de muestras están siendo transmitidos por el 
+computadora o el instrumento está demasiado ocupado (véase la sección 2.2, Solicitud de campo, 
+Página 13) para aceptar nuevas peticiones de la muestra, el intervalo se establece en 15 
+segundos. Cuando las solicitudes de muestras son enviados por la computadora y el 
+instrumento no está ocupado, el intervalo de sondeo se reduce a 1 segundo 
+acelerar la descarga de pedido de muestras. 
+Después de transmitir el mensaje de mensaje de encuesta o el resultado, el instrumento 
+establece un 1 segundo ACK / NAK temporizador. Cuando el ACK / NAK transcurre veces 
+sin ACK / NAK recibido, el instrumento intenta restablecer 
+comunicaciones, ya sea volviendo a una encuesta inicial, o en cantidades limitadas 
+casos por volver a transmitir el mensaje de resultado. Esta comunicación 
+la recuperación de intentar tres veces antes de declarar una interrupción, y 
+mostrar una alarma visible y audible para el operador. 
+Después de transmitir el resultado y la recepción de la confirmación de la 
+computadora, el instrumento fija otro temporizador de respuesta de 1 segundo. Si no se 
+Resultados de la aceptación mensaje es recibido, el instrumento trata de 
+restablecer las comunicaciones, ya sea volviendo a una encuesta inicial, o en 
+casos limitados por volver a transmitir el mensaje de resultado. Este 
+recuperación de la comunicación se intenta tres veces antes de declarar una 
+interrupción, y mostrar una alarma visible y audible para el operador. 
+Si un resultado de aceptación de mensajes rechaza un mensaje de resultados, el 
+instrumento sigue transmitiendo el resultado a intervalos de 15 segundos hasta que 
+aceptado o 50 intentos se cuentan. La computadora puede usar el resultado 
+Mensaje para la aceptación de control de flujo del instrumento. Ya que el 50 
+rechazos se hacen antes de la recuperación global de error de comunicación 
+intento, la transmisión de nuevos resultados del instrumento se puede 
+suspendido por unos 30 minutos hasta que fija, o declarado 
+error. 
+Cuando se transmite el mensaje de consulta y recibir la confirmación de 
+computadora, el instrumento se establece sólo un temporizador de respuesta de 15 segundos. 
+No hay retransmisiones ocurrir por el mensaje de consulta. 
+Dimension ® química clínica Especificaciones del sistema de interfaz de apéndices 
+09/2002 A-1 D00396 
+Apéndice 
+Apéndice I: Lenguas Extranjeras 
+En las siguientes tablas, una para cada idioma, especifique los códigos ASCII 
+la obligación de comunicar el lenguaje caracteres que dependen de la 
+instrumento. Todos los personajes no se especifica a continuación son estándar ASCII. 
+Alemán
+
+Código ASCII de caracteres ASCII de caracteres de idiomas 
+[5b A (diéresis) 
+{Ä 7b (una diéresis) 
+~ 7e ß (Beta) 
+\ 5 Ö (diéresis O) 
+| 7c ö (o diéresis) 
+Ü} 7d (diéresis u) 
+] 5d Ü (diéresis U) 
+Español 
+Código ASCII de caracteres ASCII de caracteres de idiomas 
+? ? ~ (Tilde) 
+"7e ¨ (diéresis) 
+disponible '(acento agudo) 
+\ 5c ç (c con cedilla) 
+: A4 Ñ (N con tilde) 
+; C4 n (n con tilde) 
+@ 40 A (un acento grave) 
+| Ù 7c (u acento grave) 
+Francés 
+Código ASCII de caracteres ASCII de caracteres de idiomas 
+| Ù 7c (u acento grave) 
+@ 40 A (un acento grave) 
+7b {c (c acento agudo) 
+} 7d (c acento grave) 
+\ Ç 5c con cedilla 
+¨ bis diéresis 
+Código ASCII de caracteres ASCII de caracteres de idiomas 
+| 40 A (un acento grave) 
+\ 5c ç (c con cedilla) 
+} 7d (c acento grave) 
+| Ù 7c (u acento grave) 
+7b {c (c acento agudo) 
+J 58 ò (o acento grave) 
+Dimension ® química clínica Especificaciones del sistema de interfaz de apéndices 
+09/2002 A-2 D00396 
+Apéndice II: Tabla de nombres de pruebas válidas 
+ACP DBIL MYO 
+ACTM DGNA NA 
+AHDL DGTX OPI 
+ALB ECO2 PALB 
+ALC PCHE FERR 
+ALDL PCP FPSA 
+ALP T4L PHNO 
+ALT PHOS GANTE 
+AMON PSA GGT 
+AMPH PTN GLU 
+AMY HA1C RCRP 
+AST HCG SAL 
+BARB HDL T4 
+BENZ TBIL IBCT 
+BUN IGA TCO2 
+TGL GIG C3 
+C4 IGM THC 
+THEO IRN CA 
+COL TIBC K 
+LA CK TOBR 
+CKMB TP LDH 
+CL TPSA LHCG 
+COC LI TRIG 
+CRBM LIP TRNF 
+CREA TSH LMMB 
+PCR TU LTNI 
+CSA METANFETAMINA UCFP 
+CTnI URCA MG 
+MMB VALP 
+VANC 
+Las pruebas siguientes se calculan y se cargan por la 
+Dimensión ? único instrumento. No se puede descargar. 
+% RIESGO ISAT FTI 
+% GLOB MB 
+% IBIL FPSA 
+A / G LDL 
+AGAP OSMO 
+BN / CR UIBC 
+Dimension ® química clínica Especificaciones del sistema de interfaz de apéndices 
+09/2002 A-3 D00396 
+Apéndice III: Tabla de Códigos de error de validación 
+Error 
+Código 
+Suprimir 
+Resultados
+
+Error de interpretación 
+1 NA Temperatura fuera de rango 
+2 NO calibración expiró 
+3 NO análisis fuera de rango 
+4 NO Absorbancia 
+5 NO Sistema de medición (ruido, cubetas, etc) 
+6 NO reactivo de control de calidad 
+7 SI error aritmético 
+8 Sí No calibrados 
+9 Sí No reactivo 
+10 SÍ prueba abortada 
+11 SÍ Procesamiento de error 
+12 SI error de software 
+13 NO "hemoglobina" 
+14 NO reacción anormal 
+15 NO diluido 
+16 Sí Inferior a ensayo 
+Por encima de 17 SÍ valores de la prueba 
+Dimension ® química clínica Especificaciones del sistema de interfaz de apéndices 
+09/2002 A-4 D00396 
+Apéndice IV: Explicación de códigos de error 
+Explicación Código de error 
+Resultados 
+Suprimida 
+12 Error de software Software de error existe en el instrumento SÍ 
+11 Proceso de error de un error de sistema de proceso de que se produjo 
+impidió que el sistema de la determinada 
+resultado. 
+SÍ 
+10 pruebas abortadas 
+No alícuotas 
+Una acción del sistema (por el usuario o sistema) abortados 
+esta prueba. 
+SÍ 
+9 No reactivo El sistema carecía de suficiente reactivo para este 
+prueba o una hidratación de un reactivo no. 
+SÍ 
+8 No se calibra el lote de cartuchos de reactivos para este método 
+nunca ha sido calibrado. 
+SÍ 
+7 Aritmética El resultado no pudo ser calculado 
+utilizando los coeficientes actuales para que 
+método. 
+SÍ 
+17 Por encima de rango Conjunto encima de valores de la prueba actual de no-lineales 
+métodos. 
+SÍ 
+16 A continuación gama Conjunto Inferior actual ensayo para los no-lineales 
+métodos 
+SÍ 
+Seis reactivos de control de calidad 
+Anormal Conjunto 
+Ensayo está fuera del rango establecido para el 
+método especificado. Ver notas de la versión. 
+NO 
+14 reacción anormal Indica las condiciones de reacción anormal, 
+i. e., espuma, burbujas de aire o turbidez 
+problemas están presentes en la mezcla en el 
+cubeta. 
+NO 
+4 La lectura de absorbancia fotométrica estaba fuera de 
+rango aceptable. Consulte "Química 
+Solución de problemas ". 
+NO 
+exceso de antígeno 
+Conjunto rng / dilución 
+de error baja "A" 
+de error de alto 'A' 
+deplet'n subst 
+Estos errores son reportados a cabo como código (4) 
+13 Hemoglobina La muestra contiene suficiente hemoglobina 
+para interferir con los resultados DBIL sistema. 
+Sin embargo, esto no afectará los resultados TBIL 
+NO 
+5 Medición Durante la medición fotométrica, el 
+sistema detecta algún ruido o las variaciones en 
+la absorbancia. 
+NO 
+Tres valores de la prueba o diluido El resultado de esta prueba fue de ensayo 
+rango definido por el método lineal. 
+NO 
+2 de calibración expiró el lote de cartuchos de reactivos para la prueba tuvo una 
+VENCIDO estado de calibración. 
+NO 
+15 diluido La prueba ha sido autodiluted por el 
+instrumento. 
+NO 
+Una temperatura La temperatura de la cubeta estaba fuera de 
+rango aceptable. 
+NO
