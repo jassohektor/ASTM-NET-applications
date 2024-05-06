@@ -31,7 +31,7 @@ Dimension XL/RxL:
 
 
 <p align="center" style="font-weight: bolder;">DB - stored procedure example</p>
-![sp_GetUsertData](https://github.com/jassohektor/ASTM-.NET-windows-apps/assets/168608755/5c901330-82cc-4343-ad4c-4976b9d53900)
+![image](https://github.com/jassohektor/ASTM-.NET-windows-apps/assets/168608755/5c901330-82cc-4343-ad4c-4976b9d53900)
 
 
 
