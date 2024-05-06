@@ -26,20 +26,19 @@ IMMULITE 1000:
 Dimension XL/RxL:
   * Monodirectional data communication protocol is comprised of two layers of communication occurring between the computer and the instrument.
 
-<p align="center">
  ![image](https://github.com/jassohektor/ASTM-.NET-windows-apps/assets/168608755/95a335b1-15ba-4e13-a370-0d08a601f81d)
-</p>
+
 
 
 <p align="center" style="font-weight: bolder;">DB - stored procedure example</p>
-<p align="center"">
 ![sp_GetUsertData](https://github.com/jassohektor/ASTM-.NET-windows-apps/assets/168608755/5c901330-82cc-4343-ad4c-4976b9d53900)
-</p>
+
 
 
 <p align="center" style="font-weight: bolder;">Final Notes</p>
 
 Feeling frustrated for getting too much information? believe me I was going to give up and cry like a baby when I were working with those instruments, nobody helped me except by the doctor to validate results of the patients but the developer inside me said: you can do it or go home to spread tears on your pillow AND I'm not sure whether this repo can help out someone else or guide you to understand better ASTM standards, also the laboratory system applications will not work without the database and propper dbo objects to handle operations, obviously you need the instrument because of the required settings to prepare the port communication and maybe some doctor to guide you getting the samples ready to make the blood tests. However here you can start to develop your own clinical system and you already have all the blood tests cover, of course those instruments must cost alot of money. please reach me out if you need any help.
+
 
 
 <p align="center" style="font-weight: bolder;">A bit of gossip of this experience</p>
