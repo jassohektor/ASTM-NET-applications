@@ -42,7 +42,7 @@ Feeling frustrated for getting too much information? believe me! I was going to 
 
 
 
-<p align="center" style="font-weight: bolder;">A bit of gossip of this experience</p>
+<p align="center" style="font-weight: bolder;">A bit of gossip from this experience</p>
 
 The company I was working for along time ago when I developed those apps never invested to improve their systems and they paid me like if I were a student or worst than a developer junior, I couldn't even survive with that salary and when I quit that job "they blackmailed me". I'm not saying all companies are like that but man I was young and back in the day was really hard to push myself to success!
 
