@@ -30,10 +30,8 @@ Dimension XL/RxL:
 
 
 
-<p align="center" style="font-weight: bolder;">
- DB - stored procedure example <br\>
- SP file located in root folder
-</p>
+<p align="center" style="font-weight: bolder;">DB - stored procedure example</p>
+<p align="center">SP file located in root folder</p>
 
 ![image](https://github.com/jassohektor/ASTM-.NET-windows-apps/assets/168608755/68bd1547-78d1-4463-8398-defaed17d0e2)
 
