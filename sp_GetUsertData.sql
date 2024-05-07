@@ -1,7 +1,7 @@
 use[db]
 go
 
---The stored procedure below is just an example of the lab system db.objects relationship.
+--The stored procedure below is just an example of the lab system db.objects relationship model.
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetUsertData]') AND type in (N'P', N'PC'))
 	DROP PROCEDURE [dbo].[sp_GetUsertData]
 GO
@@ -36,7 +36,7 @@ SET @barcode	= RIGHT(LEFT(@userRequest,3), 2)
 SELECT us.[UserName], cm.[SystemSample], cm.[Code] as [studio]
 FROM @tblEventRequest	er
 	JOIN @tblUser 			us		ON us.[UserId]			= er.[UserId]
-	JOIN @tblRequestDetail	rd		ON er.[RequestDetailId]	= rd.[RequestDetailId]
+	JOIN @tblRequestDetail		rd		ON er.[RequestDetailId]	= rd.[RequestDetailId]
 	JOIN @tblStudioType		st		ON st.[StudioTypeId]	= rd.[StudioTypeId]
 	JOIN @tblParameters		pr		ON pr.[ParameterId]		= st.[ParameterId]
 	JOIN @tblCodeMap		cm		ON cm.[CodeMapId]		= pr.[CodeMapId]
