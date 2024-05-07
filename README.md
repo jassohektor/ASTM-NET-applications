@@ -32,7 +32,7 @@ Dimension XL/RxL:
 
 <p align="center" style="font-weight: bolder;">DB - stored procedure example (file located in root folder)</p>
 
-![image](https://github.com/jassohektor/ASTM-NET-applications/assets/168608755/360678cd-3471-4d73-bfa4-e91def50d4f1)
+![image](https://github.com/jassohektor/ASTM-NET-applications/assets/168608755/71400398-91be-4117-846f-7b21fb3b97a5)
 
 
 
