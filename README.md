@@ -24,7 +24,7 @@ IMMULITE 1000:
   * Unidirectional LIS specification ASTM E1394.
 
 Dimension XL/RxL:
-  * Monodirectional data communication protocol is comprised of two layers of communication occurring between the computer and the instrument.
+  * Monodirectional data communication protocol is composed of two layers of communication occurring between the computer and the instrument.
 
  ![image](https://github.com/jassohektor/ASTM-.NET-windows-apps/assets/168608755/95a335b1-15ba-4e13-a370-0d08a601f81d)
 
